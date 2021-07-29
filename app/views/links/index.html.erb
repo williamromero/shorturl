@@ -1,0 +1,44 @@
+<div class="mc-container">
+  <div class="mc-container__title">
+    <h3>TinyURL&sup2;</h3>
+  </div>
+
+  <div class="mc-container__form">
+    <%= form_with model: Link, remote: false do |f| %>
+      <%= f.text_field :original_url, placeholder: 'Insert your URL and press ENTER' %>
+    <% end %>
+  </div>
+
+  <div class="mc-container__info">
+    <div class="box">
+      <h4>List of Links</h4>
+      <div class="items">
+        <div class="titles">
+          <div class="long-url">
+            <i class="fas fa-external-link-alt"></i>
+            <strong>Long URL</strong>
+          </div>
+          <div class="tiny-url">
+            <i class="fas fa-link"></i>
+            <strong>Tiny URL</strong>          
+          </div>
+        </div>
+        <div class="links-list">        
+          <% @links.each do |link| %>
+            <div class="links">
+              <div class="long-url">
+                <i class="fas fa-share-alt-square tooltip" id="shareIcon" data-url="<%= "#{request.base_url}/#{link.slug}" %>">
+                  <!--<span class="tooltiptext">Copy & Share</span>-->
+                </i>
+                <%= link_to link.original_url, "#{request.base_url}/#{link.slug}/info" %>
+              </div>
+              <div class="tiny-url">
+                <%= link_to "#{request.base_url}/#{link.slug}", link.slug %>
+              </div>
+            </div>
+          <% end %>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

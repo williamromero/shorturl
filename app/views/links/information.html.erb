@@ -1,0 +1,31 @@
+<div class="mc-container">
+
+  <div class="mc-container__info">
+    <div class="box">
+      <h4>URL Information</h4>
+    </div>
+    <div class="box">
+      <div class="box-description">
+        <strong>Original URL:</strong>
+        <span><%= @link.original_url %></span>
+        <strong>Tiny URL:</strong>
+        <span><%= "#{request.base_url}/#{@link.slug}" %></span>
+        <strong>Clicks:</strong>
+        <span>Clicked <%= @link.clicked %> times</span>
+
+      </div>
+      <div class="list-of-ips">
+        <strong style="margin-top: 2em;">IPs Click Detected:</strong>                
+        <div class="list-of-ips-item">        
+          <% @link.ip_lists.each do |link| %>
+            <div class="items">
+              <span><%= link.client_ip %></span>
+              <span><%= link.created_at.strftime("%Y/%m/%d %H:%m:%S") %></span>
+            </div>
+          <% end %>
+        </div>      
+      </div>
+    </div>
+  </div>
+
+</div>

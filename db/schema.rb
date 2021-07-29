@@ -24,7 +24,6 @@ ActiveRecord::Schema.define(version: 2021_07_28_171706) do
     t.string "original_url"
     t.string "slug"
     t.integer "clicked", default: 0
-    t.string "client_ip"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end

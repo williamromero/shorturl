@@ -8,7 +8,12 @@ class Shortener
   end
 
   def generate_short_link
-    Link.create(original_url: url, slug: slug_generator_code)
+    link = search_slug_code
+    link.nil? ? Link.create(original_url: url, slug: slug_generator_code) : nil
+  end
+
+  def search_slug_code
+    Link.find_by_slug(slug_generator_code)
   end
 
   def slug_generator_code

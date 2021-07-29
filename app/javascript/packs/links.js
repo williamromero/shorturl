@@ -17,16 +17,18 @@ document.addEventListener("turbolinks:load", () => {
         .then(function (response) { return response.json() })
         .then(function (data) {
           originalURL.value = "";
-          html.innerHTML += `
-            <div class="links">
-              <div class="long-url">
-                <i class="fas fa-share-alt-square tooltip" id="shareIcon" data-url="http://${location.host}/${data.link.slug}"></i>
-                <a href="http://${location.host}/${data.link.slug}/info">${data.link.original_url}</a>
+          if (data.link !== null) {
+            html.innerHTML += `
+              <div class="links">
+                <div class="long-url">
+                  <i class="fas fa-share-alt-square tooltip" id="shareIcon" data-url="http://${location.host}/${data.link.slug}"></i>
+                  <a href="http://${location.host}/${data.link.slug}/info">${data.link.original_url}</a>
+                </div>
+                <div class="tiny-url"> <a href="/${data.link.slug}">http://${location.host}/${data.link.slug}</a> </div>            
               </div>
-              <div class="tiny-url"> <a href="/${data.link.slug}">http://${location.host}/${data.link.slug}</a> </div>            
-            </div>
-          `;
-          setShareBTNS();
+            `;
+            setShareBTNS();
+          }
         });
       }
   });
@@ -36,7 +38,6 @@ document.addEventListener("turbolinks:load", () => {
       elm.addEventListener("click", async (e) => {
         await navigator.clipboard.writeText(e.target.dataset.url);
         alert('The shorturl is copied to clipboard.');
-        // console.log(await navigator.clipboard.readText());
       });
     });
   }  

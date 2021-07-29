@@ -11,7 +11,11 @@ class LinksController < ApplicationController
   def create
     shorter = Shortener.new(link_params[:original_url])
     link = shorter.generate_short_link
-    render json: { result: 0, link: link }
+    if !link.nil?
+      render json: { result: 0, link: link }
+    else
+      render json: { result: 1, link: nil }
+    end
   end
 
   def redirect
